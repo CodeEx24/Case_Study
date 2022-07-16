@@ -267,7 +267,7 @@ class Menu extends Frame implements ActionListener, ItemListener
         //If Calculate button is click then it will check the state of each checkbox and add those active in total.
         if (e.getSource() == btnCalculate){
             float total = 0, value;
-            
+            //Starting here it will check the state of each checkbox. If it is true then it will add the value of that specific product.
             if(chkCM1.getState() == true){
                 value =  100 * Float.parseFloat(txtCM1.getText());
                 total += value;
@@ -297,7 +297,7 @@ class Menu extends Frame implements ActionListener, ItemListener
                 value =  25 * Float.parseFloat(txtSprite.getText());
                 total += value;
             }
-            //Setting the textfield value  in Total
+            //Setting the textfield of total value of all inputted products.
             txtTotal.setText("Php " + String.valueOf(twoDigits.format(total)));
         }
         

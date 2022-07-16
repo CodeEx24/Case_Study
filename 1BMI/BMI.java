@@ -98,11 +98,9 @@ public class BMI extends Applet{
                 f.setForeground(White);
                 f.setLayout(new GridLayout(3, 1, 10, 10));
 
-                //Components in new frame as well as variable for computation
-                String h = txtCompoHeight.getText();
-                String w = txtCompoWeight.getText();
-                Float dheight = Float.parseFloat(h);
-                Float dweight = Float.parseFloat(w);
+                //Components in new frame as well as float data type for computation
+                Float dheight = Float.parseFloat(txtCompoHeight.getText());
+                Float dweight = Float.parseFloat(txtCompoWeight.getText());
                 Float dresult = dweight/(dheight*dheight);
                 Label lblResult = new Label("Your BMI is "+ twoDigits.format(dresult));
                 Label lblTitle2 = new Label("BMI Result");
@@ -123,9 +121,6 @@ public class BMI extends Applet{
                 fPanel2.setLayout(new GridLayout(2, 1, 10, 10));
                 fPanel2.setSize(100, 50);
                 fPanel2.add(lblResult); //Adding component to panel
-                
-                //Adding the component in to the frame
-                f.add(fPanel1);
                 
                 //Condition statement for the result
                 if(dresult >= 20 & dresult <= 26){

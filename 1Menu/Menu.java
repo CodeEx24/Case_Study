@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.text.DecimalFormat;
+import java.awt.event.KeyListener;
+import java.security.Key;
 
 class Menu extends Frame implements ActionListener, ItemListener
 {   private static final int FRAME_WIDTH = 500;
@@ -30,7 +32,7 @@ class Menu extends Frame implements ActionListener, ItemListener
     Label lblX5 = new Label("x");
     Label lblX6 = new Label("x");
     Label lblBlank = new Label(""); //We input this because we can't set the last component at the exact position
-    //By adding this component this will became in random position.
+    //By adding this component this will became the last component that goes in random position.
     
     //Setting the font properties
     Font fontCBBold = new Font("Font.Serif", Font.BOLD,16);
@@ -54,9 +56,6 @@ class Menu extends Frame implements ActionListener, ItemListener
     Checkbox chkSprite = new Checkbox("Sprite Php 25.00");
     Checkbox chkERice = new Checkbox("Extra Rice + 20.00");
 
-    //State of the checkbox (boolean)
-    boolean stateCM1, stateCM2, stateCM3, stateErice, stateCoke, stateSprite;
-
     //Panel
     Panel p1 = new Panel();
     Panel p2 = new Panel();
@@ -69,7 +68,6 @@ class Menu extends Frame implements ActionListener, ItemListener
 
     // constructor
     public Menu(){
-       
         // set frame properties
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setResizable(false);
@@ -77,7 +75,6 @@ class Menu extends Frame implements ActionListener, ItemListener
         setLocation(150, 150);
         setForeground(White);
         setBackground(Green);
-        
         
         //Setting properties of title and adding it into frame
         lblTitle.setForeground(Orange);
@@ -117,6 +114,7 @@ class Menu extends Frame implements ActionListener, ItemListener
         chkERice.addItemListener(this);
         chkCoke.addItemListener(this);
         chkSprite.addItemListener(this);
+        chkERice.addItemListener(this);
 
         //Setting properties of panel then adding it into the frame
         p1.setBounds(135, 120, 400, 30);
@@ -195,6 +193,7 @@ class Menu extends Frame implements ActionListener, ItemListener
 
         // register the button to add an ActionListener to the component
         btnCalculate.addActionListener(this);
+
         // register a Program Terminator as this frame's windowlistener*/
         addWindowListener(new ProgramTerminator());
     }
@@ -202,66 +201,135 @@ class Menu extends Frame implements ActionListener, ItemListener
 
     public void itemStateChanged(ItemEvent e)
     {
+        KeyListener();
         //Getting the state of each checkbox
+        //COMBOMEAL 1
         if(chkCM1.getState() == true){
-            txtCM1.setEditable(true);    
-            //If the label text is empty then it will put 1 into the label
-            if (txtCM1.getText().isEmpty())
+            //If the textfield of that checkbox is empty then it will set the text into 1
+            if(txtCM1.getText().isEmpty()){
                 txtCM1.setText("1");
+            }
         }else{
             //Else it will reset the value and disable the edit in text field.
             txtCM1.setText("");
             txtCM1.setEditable(false);
         }
         
+        //COMBOMEAL 2
         if(chkCM2.getState() == true){
-            txtCM2.setEditable(true);
-            if (txtCM2.getText().isEmpty())
+            if(txtCM2.getText().isEmpty()){
                 txtCM2.setText("1");
+            }
         }else{
             txtCM2.setText("");
             txtCM2.setEditable(false);
         }
         
+        //COMBOMEAL 3
         if(chkCM3.getState() == true){
-            txtCM3.setEditable(true);
-            if (txtCM3.getText().isEmpty())
+            if(txtCM3.getText().isEmpty()){
                 txtCM3.setText("1");
+            }
         }else{
             txtCM3.setText("");
             txtCM3.setEditable(false);
         }
     
+        //EXTRA RICE
         if(chkERice.getState() == true){
-            txtERice.setEditable(true);
-            if (txtERice.getText().isEmpty())
+            if(txtERice.getText().isEmpty()){
                 txtERice.setText("1");
+            }
         }else{
             txtERice.setText("");
             txtERice.setEditable(false);
         }
     
-        
+        //COKE DRINKS
         if(chkCoke.getState() == true){
-            txtCoke.setEditable(true);
-            if (txtCoke.getText().isEmpty())
+            if(txtCoke.getText().isEmpty()){
                 txtCoke.setText("1");
+            }
         }else{
             txtCoke.setText("");
             txtCoke.setEditable(false);
         }
-        
-
+    
+        //COKE SPRITE
         if(chkSprite.getState() == true){
-            txtSprite.setEditable(true);
-            if (txtSprite.getText().isEmpty())
+            if(txtSprite.getText().isEmpty()){
                 txtSprite.setText("1");
+            }
         }else{
             txtSprite.setText("");
             txtSprite.setEditable(false);
         }
-    
     }
+
+    public void KeyListener(){
+        //Adding Key Listener to disable unecessary keys such as letter.
+        txtCM1.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                //Checking for the key event if it is number or backspace the textfield will be editable as long as the state of checkbox is true.
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                    txtCM1.setEditable(chkCM1.getState());
+                } else {
+                    txtCM1.setEditable(false);
+                }
+            }
+         });
+        
+        txtCM2.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                    txtCM2.setEditable(chkCM2.getState());
+                } else {
+                    txtCM2.setEditable(false);
+                }
+            }
+        });
+
+        txtCM3.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                    txtCM3.setEditable(chkCM3.getState());
+                } else {
+                    txtCM3.setEditable(false);
+                }
+            }
+        });
+        
+        txtERice.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                    txtERice.setEditable(chkERice.getState());
+                } else {
+                    txtERice.setEditable(false);
+                }
+            }
+        });
+
+        txtCoke.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                    txtCoke.setEditable(chkCoke.getState());
+                } else {
+                    txtCoke.setEditable(false);
+                }
+            }
+        });
+
+        txtSprite.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                    txtSprite.setEditable(chkSprite.getState());
+                } else {
+                    txtSprite.setEditable(false);
+                }
+            }
+        });
+    }
+
     public void actionPerformed(ActionEvent e)
     {
         //If Calculate button is click then it will check the state of each checkbox and add those active in total.
@@ -299,8 +367,6 @@ class Menu extends Frame implements ActionListener, ItemListener
             }
             //Setting the textfield of total value of all inputted products.
             txtTotal.setText("Php " + String.valueOf(twoDigits.format(total)));
-        }
-        
+        }  
     }
-    
 }

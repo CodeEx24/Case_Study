@@ -7,7 +7,7 @@ import java.awt.Button;
 import javax.swing.JFrame;
 import java.text.DecimalFormat;
 
-public class BMI extends Applet{ 
+public class BMI extends Applet implements ActionListener{ 
     //Decimal Format Pattern
     DecimalFormat twoDigits = new DecimalFormat("0.00");
     
@@ -45,6 +45,9 @@ public class BMI extends Applet{
         setLayout(GLbrowser);
         setBackground(bgColor);
         setSize(300,300);
+        
+        //KeyListener to limit user unecessary character in text field.
+        KeyListener();
         
         //Setting properties of the component
         txtCompoHeight.setForeground(Black);  
@@ -84,11 +87,38 @@ public class BMI extends Applet{
         add(p2);
 
         //Button Action Listener
-        btnCompute.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        btnCompute.addActionListener(this);
 
-                JFrame f = new JFrame();
+    }
+
+    public void KeyListener(){
+        txtCompoHeight.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                //This will check for key event to limit the user to input unecessary character
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE || ke.getKeyChar() == KeyEvent.VK_PERIOD) {
+                    //If the user input a number or dot it will be editable.
+                    txtCompoHeight.setEditable(true);
+                } else {
+                    //Else it will not be editable.
+                    txtCompoHeight.setEditable(false);
+                }
+            }
+        });
+
+        txtCompoWeight.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE || ke.getKeyChar() == KeyEvent.VK_PERIOD) {
+                    txtCompoWeight.setEditable(true);
+                } else {
+                    txtCompoWeight.setEditable(false);
+                }
+            }
+        });
+    }
+
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == btnCompute){
+            JFrame f = new JFrame();
 
                 //Setting properties for the frame
                 f.setVisible(true);
@@ -136,12 +166,11 @@ public class BMI extends Applet{
                     lblFeedback.setAlignment(1);
                     fPanel2.add(lblFeedback);
                 }
-                //Adding the panel result in to the frame
-                f.add(fPanel1);
-                f.add(fPanel2);
-            }
-        });
 
+            //Adding the panel result in to the frame
+            f.add(fPanel1);
+            f.add(fPanel2);
+        }
     }
 
 }

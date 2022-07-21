@@ -3,8 +3,6 @@ import java.applet.Applet;
 import java.awt.event.*;
 public class Calculator extends Applet implements ActionListener
 {
-    String Operator;
-
     //Color properties for foreground and background
     Color Gray = new Color(0xD4D4D2);
     Color Black = new Color(0x1C1C1C);
@@ -31,7 +29,7 @@ public class Calculator extends Applet implements ActionListener
     Button btnOn = new Button("ON");
     Button btnClear = new Button("CLEAR");
     
-    //Panel
+    //Panel for buttons
     Panel p1 = new Panel();
     Panel p2 = new Panel();
 
@@ -40,15 +38,12 @@ public class Calculator extends Applet implements ActionListener
     GridLayout GLButton1 = new GridLayout(1, 4, 10, 10);
     GridLayout GLButton2 = new GridLayout(1, 3, 10, 10);
     GridLayout GLButton3 = new GridLayout(1, 1, 10, 10);
-    
-    public void init(){
-        //Setting properties of a browser
-        setLayout(GLBrowser);
-        setBackground(Black);
-        setForeground(Gray);
-        setSize(300, 300);
 
-        //Button initialize value
+    String Operator; //Operator so this can be pass in equal button to check what to perform.
+    Boolean v1; //Added so we can access the boolean in the key Listener.
+
+    public void ButtonDefault(){
+        //Button default setEnabled false (OFF)
         btnAdd.setEnabled(false);
         btnMinus.setEnabled(false);
         btnMultiply.setEnabled(false);
@@ -56,8 +51,9 @@ public class Calculator extends Applet implements ActionListener
         btnOff.setEnabled(false);
         btnClear.setEnabled(false);
         btnEqual.setEnabled(false);
+        btnOn.setEnabled(true);
 
-        //Button Background Color
+        //Button default background color (OFF)
         btnAdd.setBackground(Gray);
         btnMinus.setBackground(Gray);
         btnMultiply.setBackground(Gray);
@@ -66,8 +62,10 @@ public class Calculator extends Applet implements ActionListener
         btnOff.setBackground(Gray);
         btnClear.setBackground(Gray);
         btnEqual.setBackground(Gray);
+    }
 
-        //Setting the properties of diffirent components
+    public void SettingComponent(){
+        //Setting the properties of different components
         lblTitle.setFont(fontTitle);
         lblTitle.setAlignment(1);
         lblTitle.setForeground(Blue);
@@ -80,6 +78,63 @@ public class Calculator extends Applet implements ActionListener
         txtResults.setBackground(Gray);
         txtResults.setForeground(Black);
         txtResults.setEditable(false);
+
+        //Action Listener for button
+        btnAdd.addActionListener(this);
+        btnMinus.addActionListener(this);
+        btnMultiply.addActionListener(this);
+        btnDivision.addActionListener(this);
+        btnOn.addActionListener(this);
+        btnOff.addActionListener(this);
+        btnClear.addActionListener(this);
+        btnEqual.addActionListener(this);
+    }
+
+    public void ResetTextfield(){
+        //To disable and reset the text in input field
+        txtFirstNo.setText("");
+        txtSecondNo.setText("");
+        txtResults.setText("");
+        Operator = "";
+    }
+
+    //This KeyListener is to basically limit the key that the user can type in textfield.
+    public void KeyListener(Boolean bool1){
+        //This is added so we can access the bool value to pass it inside KeyPressed method.
+        v1 = bool1;
+        txtFirstNo.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                //This will check for key event to limit the user to input unecessary character
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE || ke.getKeyChar() == KeyEvent.VK_PERIOD) {
+                    //Passing the bool value of v1 so if it is false no matter what key the user is press the textfield will not be editable.
+                    txtFirstNo.setEditable(v1);
+                } else {
+                    txtFirstNo.setEditable(false);
+                }
+            }
+        });
+
+        txtSecondNo.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE || ke.getKeyChar() == KeyEvent.VK_PERIOD) {
+                    txtSecondNo.setEditable(v1);
+                } else {
+                    txtSecondNo.setEditable(false);
+                }
+            }
+            });
+    }
+
+    public void init(){
+        //Setting properties of a browser
+        setLayout(GLBrowser);
+        setBackground(Black);
+        setForeground(Gray);
+        setSize(300, 300);
+        
+        //Calling the method for setting the different properties
+        SettingComponent();
+        ButtonDefault();
 
         //Setting the panel properties
         p1.setBackground(Black);
@@ -112,16 +167,6 @@ public class Calculator extends Applet implements ActionListener
         add(btnEqual);
         add(txtResults);
         add(p2);
-
-        //Action Listener for button
-        btnAdd.addActionListener(this);
-        btnMinus.addActionListener(this);
-        btnMultiply.addActionListener(this);
-        btnDivision.addActionListener(this);
-        btnOn.addActionListener(this);
-        btnOff.addActionListener(this);
-        btnClear.addActionListener(this);
-        btnEqual.addActionListener(this);
     }
  
     public void actionPerformed(ActionEvent e){
@@ -146,45 +191,18 @@ public class Calculator extends Applet implements ActionListener
             btnEqual.setEnabled(true);
             btnOn.setEnabled(false);
 
-            //The text field will be editable when the in button is click
-            txtFirstNo.setEditable(true);
-            txtSecondNo.setEditable(true);
+            //To check for key keylistener to limit user character input.
+            KeyListener(true);
         }else if(e.getSource() == btnOff){
-            //Setting the properties of button when the calculator is Off
-            btnAdd.setBackground(Gray);
-            btnMinus.setBackground(Gray);
-            btnMultiply.setBackground(Gray);
-            btnDivision.setBackground(Gray);
-            btnOff.setBackground(Gray);
-            btnClear.setBackground(Gray);
-            btnEqual.setBackground(Gray);
-            btnOn.setBackground(LightBlack);
-
-            //Setting enable as false when it is turned off.
-            btnAdd.setEnabled(false);
-            btnMinus.setEnabled(false);
-            btnMultiply.setEnabled(false);
-            btnDivision.setEnabled(false);
-            btnOff.setEnabled(false);
-            btnClear.setEnabled(false);
-            btnEqual.setEnabled(false);
-            btnOn.setEnabled(true);
-
-            //The  text field can't be editable when it is turned off
-            txtFirstNo.setEditable(false);
-            txtSecondNo.setEditable(false);
-
-            //This is to disable and reset the text in input field
-            txtFirstNo.setText("");
-            txtSecondNo.setText("");
-            txtResults.setText("");
-            Operator = "";
+            //Calling ResetTextField method to reset all of the textfield as well as operator value.
+            ResetTextfield();
+            //Calling Button to set the properties of the default/off button.
+            ButtonDefault();
+            //Keylistener with argument false.
+            KeyListener(false);
         }else if(e.getSource() == btnClear){
-            //Setting the text as empty and reset the operator.
-            txtFirstNo.setText("");
-            txtSecondNo.setText("");
-            txtResults.setText("");
-            Operator = "";
+            //Calling function to reset all of the textfield as well as operator value.
+            ResetTextfield();
         }else if(e.getSource() == btnAdd){
             Operator = "Addition"; //Addition
         }else if(e.getSource() == btnMinus){
@@ -201,30 +219,30 @@ public class Calculator extends Applet implements ActionListener
             }else if(txtFirstNo.getText().isEmpty()){
                 txtResults.setForeground(new Color(0xFF0000));
                 txtResults.setText("Please Input a value on 1st Field!");;
-            }else {
+            }else if(txtSecondNo.getText().isEmpty()){
                 txtResults.setForeground(new Color(0xFF0000));
                 txtResults.setText("Please Input a value on 2nd Field!");;
-            }
-            
-            //Getting the value in the text field 
-            float lFirstNo = Float.valueOf(txtFirstNo.getText());
-            float lSecondNo = Float.valueOf(txtSecondNo.getText());
-
-            //Checking the operator value and perform the function inside it
-            txtResults.setForeground(Black);
-            if(Operator == "Addition"){
-                txtResults.setText(Float.toString(lFirstNo + lSecondNo));
-            }else if(Operator == "Subtraction"){
-                txtResults.setText(Float.toString(lFirstNo - lSecondNo));
-            }else if(Operator == "Multiplication"){
-                txtResults.setText(Float.toString(lFirstNo * lSecondNo));
-            }else if(Operator == "Division"){
-                txtResults.setText(Float.toString(lFirstNo / lSecondNo));
             }else{
-                //If there are no operator it will ask for the user to  input an operator
-                txtResults.setForeground(new Color(0xFF0000));
-                txtResults.setText("ERROR: Choose an operator first!");;
+                //Getting the value in the text field
+                float lFirstNo = Float.valueOf(txtFirstNo.getText());
+                float lSecondNo = Float.valueOf(txtSecondNo.getText());
+
+                //Checking the operator value and perform the function inside it
+                txtResults.setForeground(Black);
+                if(Operator == "Addition"){
+                    txtResults.setText(Float.toString(lFirstNo + lSecondNo));
+                }else if(Operator == "Subtraction"){
+                    txtResults.setText(Float.toString(lFirstNo - lSecondNo));
+                }else if(Operator == "Multiplication"){
+                    txtResults.setText(Float.toString(lFirstNo * lSecondNo));
+                }else if(Operator == "Division"){
+                    txtResults.setText(Float.toString(lFirstNo / lSecondNo));
+                }else{
+                    //If there are no operator it will ask for the user to  input an operator
+                    txtResults.setForeground(new Color(0xFF0000));
+                    txtResults.setText("ERROR: Choose an operator first!");;
+                }
             }
         }
- }
+    }
 }

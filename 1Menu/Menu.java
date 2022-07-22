@@ -1,8 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.text.DecimalFormat;
-import java.awt.event.KeyListener;
-import java.security.Key;
 
 class Menu extends Frame implements ActionListener, ItemListener
 {   private static final int FRAME_WIDTH = 500;
@@ -271,8 +269,8 @@ class Menu extends Frame implements ActionListener, ItemListener
         txtCM1.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
                 //Checking for the key event if it is number or backspace the textfield will be editable as long as the state of checkbox is true.
-                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-                    txtCM1.setEditable(chkCM1.getState());
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9' && chkCM1.getState() == true) || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                    txtCM1.setEditable(true);
                 } else {
                     txtCM1.setEditable(false);
                 }
@@ -281,8 +279,8 @@ class Menu extends Frame implements ActionListener, ItemListener
         
         txtCM2.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
-                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-                    txtCM2.setEditable(chkCM2.getState());
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9' && chkCM2.getState() == true) || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                    txtCM2.setEditable(true);
                 } else {
                     txtCM2.setEditable(false);
                 }
@@ -291,8 +289,8 @@ class Menu extends Frame implements ActionListener, ItemListener
 
         txtCM3.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
-                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-                    txtCM3.setEditable(chkCM3.getState());
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9'  && chkCM3.getState() == true) || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                    txtCM3.setEditable(true);
                 } else {
                     txtCM3.setEditable(false);
                 }
@@ -301,8 +299,8 @@ class Menu extends Frame implements ActionListener, ItemListener
         
         txtERice.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
-                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-                    txtERice.setEditable(chkERice.getState());
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9'  && chkERice.getState() == true) || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                    txtERice.setEditable(true);
                 } else {
                     txtERice.setEditable(false);
                 }
@@ -311,8 +309,8 @@ class Menu extends Frame implements ActionListener, ItemListener
 
         txtCoke.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
-                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-                    txtCoke.setEditable(chkCoke.getState());
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9'  && chkCoke.getState() == true) || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                    txtCoke.setEditable(true);
                 } else {
                     txtCoke.setEditable(false);
                 }
@@ -321,8 +319,8 @@ class Menu extends Frame implements ActionListener, ItemListener
 
         txtSprite.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
-                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-                    txtSprite.setEditable(chkSprite.getState());
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9'  && chkSprite.getState() == true) || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                    txtSprite.setEditable(true);
                 } else {
                     txtSprite.setEditable(false);
                 }

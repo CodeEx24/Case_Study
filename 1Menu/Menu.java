@@ -186,7 +186,7 @@ class Menu extends Frame implements ActionListener, ItemListener
         p7.setBounds(155, 460, 400, 30);
         add(p7);
 
-        //This code is added because the last component in frame can't adjust the position in the frame(BUG)
+        //This code is added because the last component in frame can't adjust the position in the frame (causing a bug)
         add(lblBlank);
 
         // register the button to add an ActionListener to the component
@@ -210,7 +210,6 @@ class Menu extends Frame implements ActionListener, ItemListener
         }else{
             //Else it will reset the value and disable the edit in text field.
             txtCM1.setText("");
-
         }
         
         //COMBOMEAL 2

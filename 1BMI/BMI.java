@@ -166,7 +166,6 @@ public class BMI extends Applet implements ActionListener{
                     lblFeedback.setAlignment(1);
                     fPanel2.add(lblFeedback);
                 }
-
             //Adding the panel result in to the frame
             f.add(fPanel1);
             f.add(fPanel2);

@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.applet.Applet;
 import java.awt.event.*;
+
 public class Calculator extends Applet implements ActionListener
 {
     //Color properties for foreground and background
@@ -40,7 +41,7 @@ public class Calculator extends Applet implements ActionListener
     GridLayout GLButton3 = new GridLayout(1, 1, 10, 10);
 
     String Operator; //Operator so this can be pass in equal button to check what to perform.
-    Boolean v1; //Added so we can access the boolean in the key Listener.
+    Boolean v1; //Boolean so we can access the boolean in the key Listener.
 
     public void ButtonDefault(){
         //Button default setEnabled false (OFF)
@@ -122,7 +123,7 @@ public class Calculator extends Applet implements ActionListener
                     txtSecondNo.setEditable(false);
                 }
             }
-            });
+        });
     }
 
     public void init(){
@@ -196,7 +197,7 @@ public class Calculator extends Applet implements ActionListener
         }else if(e.getSource() == btnOff){
             //Calling ResetTextField method to reset all of the textfield as well as operator value.
             ResetTextfield();
-            //Calling Button to set the properties of the default/off button.
+            //Calling Button default to set the properties of the default/off button.
             ButtonDefault();
             //Keylistener with argument false.
             KeyListener(false);

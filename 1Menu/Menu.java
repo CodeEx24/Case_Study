@@ -210,7 +210,7 @@ class Menu extends Frame implements ActionListener, ItemListener
         }else{
             //Else it will reset the value and disable the edit in text field.
             txtCM1.setText("");
-            txtCM1.setEditable(false);
+
         }
         
         //COMBOMEAL 2
@@ -230,7 +230,6 @@ class Menu extends Frame implements ActionListener, ItemListener
             }
         }else{
             txtCM3.setText("");
-            txtCM3.setEditable(false);
         }
     
         //EXTRA RICE
@@ -240,7 +239,6 @@ class Menu extends Frame implements ActionListener, ItemListener
             }
         }else{
             txtERice.setText("");
-            txtERice.setEditable(false);
         }
     
         //COKE DRINKS
@@ -250,7 +248,6 @@ class Menu extends Frame implements ActionListener, ItemListener
             }
         }else{
             txtCoke.setText("");
-            txtCoke.setEditable(false);
         }
     
         //COKE SPRITE
@@ -260,7 +257,6 @@ class Menu extends Frame implements ActionListener, ItemListener
             }
         }else{
             txtSprite.setText("");
-            txtSprite.setEditable(false);
         }
     }
 
